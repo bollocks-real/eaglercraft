@@ -12,18 +12,19 @@
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-github-username.github.io/farmsium/">
+    <meta property="og:url" content="https://bollocks-real.github.io/farmsium/">
     <meta property="og:title" content="Farmsium Minecraft Server | Farming & Fishing SMP">
     <meta property="og:description" content="The ultimate Minecraft farming and fishing experience. Build your agricultural empire today!">
     <meta property="og:image" content="https://sites.google.com/view/farmsium/home/og-image.jpg">
     
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-github-username.github.io/farmsium/">
+    <meta property="twitter:url" content="https://bollocks-real.github.io/farmsium/">
     <meta property="twitter:title" content="Farmsium Minecraft Server">
     <meta property="twitter:description" content="The ultimate Minecraft farming and fishing experience.">
     <meta property="twitter:image" content="https://sites.google.com/view/farmsium/home/twitter-image.jpg">
     <meta name="google-site-verification" content="SKAmy0D1lTWmXWBQ87YNBXTxZCGA7WFsc9WqpEFmGuU" />
+    
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
     {
@@ -39,14 +40,6 @@
         "name": "Farmsium"
       }
     }
-    </script>
-    
-    <!-- Instant redirect for users, but bots will index this page first -->
-    <script>
-        // Instant redirect for real users
-        if (!navigator.webdriver && !window.crossOriginIsolated) {
-            window.location.href = "https://sites.google.com/view/farmsium/home";
-        }
     </script>
     
     <style>
@@ -144,17 +137,29 @@
     </div>
 
     <script>
-        // Hide SEO content from real users, show loading
-        if (!navigator.webdriver) {
+        // Smart bot detection with instant redirect for real users
+        const isLikelyBot = navigator.webdriver || 
+                           window.crossOriginIsolated ||
+                           /bot|crawl|spider|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|TelegramBot/i.test(navigator.userAgent);
+
+        if (isLikelyBot) {
+            // SEO bots see the full content immediately
+            document.getElementById('userView').style.display = 'none';
+            document.querySelector('.seo-content').style.display = 'block';
+            
+            // Let bots index for 5 seconds, then redirect
+            setTimeout(() => {
+                window.location.href = "https://sites.google.com/view/farmsium/home";
+            }, 5000);
+        } else {
+            // Real users get instant redirect
             document.querySelector('.seo-content').style.display = 'none';
             document.getElementById('userView').style.display = 'block';
-            // Instant redirect
+            
+            // Instant redirect for humans
             setTimeout(() => {
                 window.location.href = "https://sites.google.com/view/farmsium/home";
             }, 100);
-        } else {
-            // SEO bots see the full content
-            document.getElementById('userView').style.display = 'none';
         }
     </script>
 </body>
