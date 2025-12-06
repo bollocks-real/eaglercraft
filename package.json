@@ -1,0 +1,87 @@
+{
+  "name": "eaglercraft-desktop",
+  "version": "1.20.0",
+  "description": "Desktop client for Eaglercraft 1.20 - Web-based Minecraft client packaged with Electron",
+  "author": "EaglyMC Developers/Contributors & black_lamborghini_svj",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "WINEARCH=win32 WINEPREFIX=~/.wine32 xvfb-run --auto-servernum electron-builder --win",
+    "build:win-portable": "WINEARCH=win32 WINEPREFIX=~/.wine32 xvfb-run --auto-servernum electron-builder --win portable",
+    "build:win-installer": "WINEARCH=win32 WINEPREFIX=~/.wine32 xvfb-run --auto-servernum electron-builder --win nsis",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "pack": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.eaglercraft.desktop",
+    "productName": "Eaglercraft 1.20",
+    "copyright": "Copyright © 2024 Eaglercraft",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "EaglyMC/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64"]
+        }
+      ],
+      "publisherName": "Eaglercraft"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Eaglercraft 1.20",
+      "uninstallDisplayName": "Eaglercraft 1.20 Desktop"
+    },
+    "portable": {
+      "artifactName": "Eaglercraft-1.20-Portable.exe"
+    },
+    "mac": {
+      "category": "public.app-category.games",
+      "target": ["dmg", "zip"]
+    },
+    "linux": {
+      "target": ["AppImage", "deb", "rpm"],
+      "category": "Game"
+    }
+  },
+  "devDependencies": {
+    "electron": "^26.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "keywords": [
+    "eaglercraft",
+    "minecraft",
+    "game",
+    "client",
+    "desktop",
+    "electron"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/eaglercraft-desktop"
+  },
+  "homepage": "https://eaglercraft.com"
+}
